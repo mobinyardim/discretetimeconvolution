@@ -1,33 +1,33 @@
 package com.app.mobinyardim.discretetimeconvolution;
 
 import android.graphics.Color;
+import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
-    private LineChart xnChart, hnChart , convChart;
+    private LineChart xnChart, hnChart, convChart;
     private TextInputLayout xn, nx, hn, nh;
     private Button convolution, draw;
-
+    private boolean drawed = false;
+    private boolean conv = false;
     private float[][] input, feedBack;
 
     @Override
@@ -115,26 +115,52 @@ public class MainActivity extends AppCompatActivity {
         draw.setOnClickListener(v -> {
                     if (getData()) {
                         drawCharts();
+                        drawed= true;
+                        if(conv){
+                            conv =false;
+
+                            convChart.clear();
+                            convChart.setData(new LineData( new LineDataSet(new ArrayList<>(), "y[n]")));
+                            convChart.invalidate();
+                        }
                     }
                 }
         );
 
         convolution.setOnClickListener(v -> {
-            ArrayList<ArrayList<Float>> list = convolution();
+            if (drawed && !conv) {
 
+                ArrayList<ArrayList<Float>> list = convolution();
 
+                conv = true;
+                drawed = false;
 
-            List<Entry> entries = new ArrayList<>();
-            for (ArrayList<Float> pos : list) {
-                entries.add(new Entry(pos.get(0), pos.get(1)));
+                Set<ArrayList<Float>> mySet = new LinkedHashSet<>(list);
+                list.clear();
+                list.addAll(mySet);
+
+                List<Entry> entries = new ArrayList<>();
+                for (ArrayList<Float> pos : list) {
+                    entries.add(new Entry(pos.get(0), pos.get(1)));
+                }
+                try {
+                    LineDataSet dataSet = new LineDataSet(entries, "y[n]");
+                    dataSet.setCircleColor(Color.RED);
+                    dataSet.setColor(Color.GREEN);
+                    dataSet.disableDashedLine();
+
+                    convChart.clear();
+                    convChart.setData(new LineData(dataSet));
+                    convChart.invalidate();
+                    convChart.requestFocus();
+                } catch (Exception e) {
+
+                    Snackbar.make(convolution, "error: " + e.getMessage(), Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                }
+            }else {
+
+                Snackbar.make(convolution, "you must draw new data", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
             }
-            LineDataSet dataSet = new LineDataSet(entries, "y[n]");
-            dataSet.setCircleColor(Color.RED);
-            dataSet.setColor(Color.GREEN);
-            dataSet.disableDashedLine();
-
-            convChart.setData(new LineData(dataSet));
-            convChart.invalidate();
         });
 
      /*   float[][] arr = {{1, 2, 3}, {1, 2, 3}};
@@ -212,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
         dataSet2.setColor(Color.RED);
         dataSet2.disableDashedLine();
 
-        xnChart.setData(new LineData(dataSet2));
+        xnChart.setData(new LineData(dataSet));
         xnChart.invalidate();
 
         hnChart.setData(new LineData(dataSet2));

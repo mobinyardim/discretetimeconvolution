@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,74 +7,120 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-
-        <TextView
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:gravity="center"
-            android:text="inputs must be in format like this :  5 , 6.47 , 8.6 ,9  \n\n n are integer"/>
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/xn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:padding="5dp">
+            android:layout_height="match_parent">
 
-            <android.support.design.widget.TextInputEditText
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="X[n]" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/nx"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:padding="5dp">
 
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="n" />
-        </android.support.design.widget.TextInputLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="inputs must be in format like this :  5 , 6.47 , 8.6 ,9  \n\n n are integer" />
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/hn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:padding="5dp">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/xn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:padding="5dp">
 
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="h[n]" />
-        </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="X[n]" />
+                </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/nh"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:padding="5dp">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/nx"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:padding="5dp">
 
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="n" />
-        </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="n" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/hn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:padding="5dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="h[n]" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/nh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:padding="5dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="n" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <TextView
+                    android:id="@+id/text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="5dp" />
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/xn_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:layout_margin="5dp" />
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/hn_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:layout_margin="5dp" />
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/conv_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:layout_margin="5dp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_marginStart="5dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="5dp"
@@ -98,34 +144,6 @@
 
         </LinearLayout>
 
+    </RelativeLayout>
 
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:gravity="center" />
-
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/xn_chart"
-            android:layout_width="match_parent"
-            android:layout_margin="5dp"
-            android:layout_height="240dp"/>
-
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/hn_chart"
-            android:layout_width="match_parent"
-            android:layout_margin="5dp"
-            android:layout_height="240dp"/>
-
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/conv_chart"
-            android:layout_width="match_parent"
-            android:layout_margin="5dp"
-            android:layout_height="240dp"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp" />
-    </LinearLayout>
-</ScrollView>
+</RelativeLayout>
